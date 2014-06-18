@@ -1,0 +1,50 @@
+<ion-side-menus>
+    <!-- Center content -->
+    <ion-side-menu-content>
+
+        <ion-header-bar class="bar bar-header bar-light">
+            <button class="button button-icon icon ion-navicon" ng-click="menuToggle()"></button>
+            <h1 class="title">{{title}}</h1>
+            <button class="button button-clear button-positive" ng-click="openSearch()"><i class="ion-ios7-search-strong"></i></button>
+        </ion-header-bar>
+        <!--<ion-content>-->
+        <ion-tabs class="tabs-positive tabs-icon-top">
+
+            <ion-tab title="more" icon-on="ion-ios7-filing" icon-off="ion-ios7-filing-outline" ui-sref="tabs.more">
+                <ion-nav-view name="more" >
+
+                </ion-nav-view>
+            </ion-tab>
+
+            <ion-tab title="list" icon-on="ion-ios7-clock" icon-off="ion-ios7-clock-outline" ui-sref="tabs.list">
+                <ion-nav-view name="list">
+
+                </ion-nav-view>
+            </ion-tab>
+
+            <ion-tab title="Settings" icon-on="ion-ios7-gear" icon-off="ion-ios7-gear-outline">
+                <ion-nav-view animation="slide-left-right">
+
+                </ion-nav-view>
+            </ion-tab>
+
+        </ion-tabs>
+
+    </ion-side-menu-content>
+
+    <!-- Left menu -->
+    <ion-side-menu side="left">
+        <div class="bar bar-header bar-light">
+            <h1 class="title">bar-light</h1>
+        </div>
+        <ion-nav-view>
+             <ion-content>
+                 sd
+             </ion-content>
+        </ion-nav-view>
+    </ion-side-menu>
+
+    <!--<!-- Right menu -->-->
+    <!--<ion-side-menu side="right">-->
+    <!--</ion-side-menu>-->
+</ion-side-menus>

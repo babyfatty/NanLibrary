@@ -1,0 +1,17 @@
+<ion-header-bar class="bar bar-header bar-light">
+    <h1 class="title">{{title}}</h1>
+    <button class="button button-clear button-positive" ng-click="cancel()">
+        Cancel
+    </button>
+</ion-header-bar>
+<ion-content>
+    <ul class="list">
+        <li ng-repeat="book in books">
+            <a class="item item-thumbnail-left" href="#">
+                <img src="../img/ionic.png">
+                <h2>{{book.title}}</h2>
+                <p>Nine Inch Nails</p>
+            </a>
+        </li>
+    </ul>
+</ion-content>
