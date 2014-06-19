@@ -24,8 +24,17 @@ angular.module('bookStore.controllers', [])
         };
 
     })
-    .controller('moreCtrl', function ($scope) {
-        $scope.$parent.setTitle('more');
+    .controller('listCtrl', function ($scope) {
+        $scope.$parent.setTitle('榜单');
+    })
+    .controller('favCtrl', function ($scope) {
+        $scope.$parent.setTitle('收藏');
+    })
+    .controller('readingCtrl', function ($scope) {
+        $scope.$parent.setTitle('在读');
+    })
+    .controller('searchPageCtrl', function ($scope) {
+        $scope.$parent.setTitle('查书');
     })
     .controller('searchCtrl', function ($scope, $state) {
         $scope.search = function () {
@@ -42,14 +51,11 @@ angular.module('bookStore.controllers', [])
         }
         $scope.books=[];
         $scope.loadMore=function(){
-            var start = $scope.books.length;
-            $http.get("https://api.douban.com/v2/book/search",{params: {q: q,start: start,count: 10}})
-                .then(function(res){
-                    $scope.books = $scope.books.concat(res.data.books);
-                },function(res){}
-            ).then(function(res){
-                    $scope.$broadcast('scroll.infiniteScrollComplete');
-                });
+              $http.get('https://api.douban.com/v2/book/search',{params: {q: q}}).success(function(res){
+                  $scope.books = $scope.books.concat(res.books);
+                  console.log(res);
+              })
+
         }
         $scope.loadMore();
     })

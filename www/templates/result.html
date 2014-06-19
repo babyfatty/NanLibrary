@@ -5,12 +5,11 @@
     </button>
 </ion-header-bar>
 <ion-content>
+    {{books.alt}}
     <ul class="list">
         <li ng-repeat="book in books">
-            <a class="item item-thumbnail-left" href="#">
-                <img src="../img/ionic.png">
-                <h2>{{book.title}}</h2>
-                <p>Nine Inch Nails</p>
+            <a class="item item-thumbnail-left" ui-sref="detail({id: book.id})">
+                <ng-include src="'templates/basicInfo.html'"></ng-include>
             </a>
         </li>
     </ul>

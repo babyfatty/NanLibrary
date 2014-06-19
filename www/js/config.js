@@ -4,7 +4,7 @@
 angular.module('bookStore.config', [])
     .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
-        $urlRouterProvider.otherwise('/tab');
+        $urlRouterProvider.otherwise('/tab/reading');
         $stateProvider
             .state('tabs',
             {
@@ -13,13 +13,13 @@ angular.module('bookStore.config', [])
                 templateUrl: 'templates/tabs.html',
                 controller: 'tabsCtrl'
             })
-            .state('tabs.more',
+            .state('tabs.fav',
             {
-                url: '/more',
+                url: '/fav',
                 views: {
-                    'more': {
-                        templateUrl: 'templates/more.html',
-                        controller: 'moreCtrl'
+                    'fav': {
+                        templateUrl: 'templates/fav.html',
+                        controller: 'favCtrl'
                     }
                 }
 
@@ -35,16 +35,38 @@ angular.module('bookStore.config', [])
                 }
 
             })
+            .state('tabs.reading',
+            {
+                url: '/reading',
+                views: {
+                    'reading': {
+                        templateUrl: 'templates/reading.html',
+                        controller: 'readingCtrl'
+                    }
+                }
+            })
+            .state('tabs.search',
+            {
+                url: '/search',
+                views: {
+                    'search': {
+                        templateUrl: 'templates/search.html',
+                        controller: 'searchPageCtrl'
+                    }
+                }
+            })
             .state('result',
             {
                 url: '/result/:q',
                 templateUrl: 'templates/result.html',
                 controller: 'resultCtrl'
-//                views:{
-//                    resultView:{
-//
-//                    }
-//                }
+
+            })
+            .state('detail',
+            {
+                url: '/detail/:id',
+                templateUrl: 'templates/detail.html',
+                controller: 'detailCtrl'
 
             })
 })
