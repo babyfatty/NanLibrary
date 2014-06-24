@@ -1,1 +1,13 @@
 /* Empty. Add your own CSS if you like */
+img{
+    width: 35%;
+    float:left;
+    padding-right: 25px;
+}
+.info{
+    float: left;
+    width: 35%;
+}
+.padTop{
+    padding-top: 50px;
+}

@@ -8,7 +8,7 @@
     {{books.alt}}
     <ul class="list">
         <li ng-repeat="book in books">
-            <a class="item item-thumbnail-left" ui-sref="detail({id: book.id})">
+            <a class="item" ui-sref="detail({id: book.id})">
                 <ng-include src="'templates/basicInfo.html'"></ng-include>
             </a>
         </li>

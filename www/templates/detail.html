@@ -1,1 +1,58 @@
-<ng-include src="'templates/basicInfo.html'"></ng-include>
+<ion-header-bar class="bar bar-header bar-light">
+    <button class="button button-clear button-positive" ng-click="cancel()">
+        Cancel
+    </button>
+    <h1 class="title">{{bookTitle}}</h1>
+</ion-header-bar>
+<ion-content class="padding">
+    <ng-include src="'templates/basicInfo.html'"></ng-include>
+
+    <div class="button-bar">
+        <a class="button button-clear" ng-click="showBookInfo()">图书信息</a>
+        <a class="button button-clear" ng-click="showReview()">书评</a>
+        <a class="button button-clear" ng-click="showLibInfo()">馆藏信息</a>
+    </div>
+
+    <div ng-show='bookInfo' class="animate-show">
+        <section class="block">
+            <h6>内容简介</h6>
+            <p>{{book.summary}}</p>
+        </section>
+        <section class="block">
+            <h6>作者简介</h6>
+            <p>{{book.author_intro}}</p>
+        </section>
+        <section class="block">
+            <h6>目录</h6>
+            <p>{{catalog}}</p>
+        </section>
+    </div>
+    <div ng-show='review' class="animate-show">
+
+        <ul class="list">
+
+            <li ng-repeat="ann in annotations">
+                <a class="item" ui-sref="annDetail({id:ann.id})">
+                    <h6>发表时间：{{ann.time}}</h6>
+                    <h6>第{{ann.page_no}}页</h6>
+                    <p>{{ann.summary}}</p>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+    <div ng-show='libInfo' class="animate-show">
+        <ul class="items">
+            <li ng-repeat="inlib in inlibs" class="item">
+                <ol>
+                    <li>索书号:{{inlib['索书号']}}</li>
+                    <li>年卷期:{{inlib['年卷期']}}</li>
+                    <li>校区—馆藏地:{{inlib['校区—馆藏地']}}</li>
+                    <li>书刊状态:{{inlib['书刊状态']}}</li>
+                </ol>
+            </li>
+        </ul>
+    </div>
+
+</ion-content>
+

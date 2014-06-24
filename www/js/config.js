@@ -67,7 +67,12 @@ angular.module('bookStore.config', [])
                 url: '/detail/:id',
                 templateUrl: 'templates/detail.html',
                 controller: 'detailCtrl'
-
+            })
+            .state('annDetail',
+            {
+                url: '/anndetail/:id',
+                templateUrl: 'templates/anndetail.html',
+                controller: 'anndetailCtrl'
             })
 })
 ;
