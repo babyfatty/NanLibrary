@@ -51,13 +51,18 @@ angular.module('bookStore.controllers', [])
         }
         $scope.books = [];
         $scope.loadMore = function () {
-            $http.get('https://api.douban.com/v2/book/search', {params: {q: q}}).success(function (res) {
+            var length=$scope.books.length;
+            $http.get('https://api.douban.com/v2/book/search', {params: {q: q,count:10,start:length}}).success(function (res) {
                 $scope.books = $scope.books.concat(res.books);
-                console.log(res);
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+                console.log(res.books);
             })
 
         };
-        $scope.loadMore();
+        $scope.$on('stateChangeSuccess', function() {
+            $scope.loadMore();
+        });
+//        $scope.loadMore();
     })
     .controller('detailCtrl', function ($scope, $stateParams, $window, $http) {
         var id = $stateParams.id;
@@ -78,11 +83,11 @@ angular.module('bookStore.controllers', [])
                 console.log(res.isbn13);
             })
         };
-        var loadReview=function(){
-            $http.get(' https://api.douban.com/v2/book/'+id+'/annotations').success(function (res) {
-
+        $scope.loadReview=function(){
+            var length = $scope.annotations.length;
+            $http.get(' https://api.douban.com/v2/book/'+id+'/annotations',{params:{count:6,start:length}}).success(function (res) {
                 $scope.annotations=$scope.annotations.concat(res.annotations);
-
+                $scope.$broadcast('scroll.infiniteScrollComplete');
                 console.log($scope.annotations);
             })
         };
@@ -110,12 +115,11 @@ angular.module('bookStore.controllers', [])
             $scope.libInfo=true;
         };
         $scope.showReview=function(){
-            loadReview();
+            $scope.loadReview();
             $scope.bookInfo=false;
             $scope.review=true;
             $scope.libInfo=false;
         };
-        loadReview();
         loadBook();
     })
     .controller('anndetailCtrl', function ($scope, $stateParams, $window, $http) {
@@ -124,7 +128,6 @@ angular.module('bookStore.controllers', [])
         $scope.cancel = function () {
             $window.history.back();
         };
-//        http://api.douban.com/book/subject/isbn/{isbnID}/reviews
         var loadReview=function(){
             $http.get(' https://api.douban.com/v2/book/annotation/'+id).success(function (res) {
 

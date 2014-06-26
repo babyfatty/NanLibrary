@@ -1,8 +1,9 @@
 <ion-header-bar class="bar bar-header bar-light">
+
+    <h1 class="title">{{bookTitle}}</h1>
     <button class="button button-clear button-positive" ng-click="cancel()">
         Cancel
     </button>
-    <h1 class="title">{{bookTitle}}</h1>
 </ion-header-bar>
 <ion-content class="padding">
     <ng-include src="'templates/basicInfo.html'"></ng-include>
@@ -30,7 +31,10 @@
     <div ng-show='review' class="animate-show">
 
         <ul class="list">
-
+            <ion-infinite-scroll
+                    on-infinite="loadReview()"
+                    distance="1%">
+            </ion-infinite-scroll>
             <li ng-repeat="ann in annotations">
                 <a class="item" ui-sref="annDetail({id:ann.id})">
                     <h6>发表时间：{{ann.time}}</h6>
