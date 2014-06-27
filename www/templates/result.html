@@ -7,15 +7,16 @@
 <ion-content>
     {{books.alt}}
     <ul class="list">
-        <ion-infinite-scroll
-            on-infinite="loadMore()"
-            distance="1%">
 
-    </ion-infinite-scroll>
         <li ng-repeat="book in books">
             <a class="item" ui-sref="detail({id: book.id})">
                 <ng-include src="'templates/basicInfo.html'"></ng-include>
             </a>
         </li>
+        <ion-infinite-scroll
+                on-infinite="loadMore()"
+                distance="1%">
+
+        </ion-infinite-scroll>
     </ul>
 </ion-content>

@@ -5,7 +5,7 @@
         <ion-header-bar class="bar bar-header bar-light">
             <button class="button button-icon icon ion-navicon" ng-click="menuToggle()"></button>
             <h1 class="title">{{title}}</h1>
-            <button class="button button-clear button-positive" ng-click="openSearch()"><i class="ion-ios7-search-strong"></i></button>
+            <!--<button class="button button-clear button-positive" ng-click="openSearch()"><i class="ion-ios7-search-strong"></i></button>-->
         </ion-header-bar>
         <!--<ion-content>-->
         <ion-tabs class="tabs-positive tabs-icon-top">
@@ -16,11 +16,11 @@
 
                 </ion-nav-view>
             </ion-tab>
-            <ion-tab title="在读" icon-on="ion-ios7-gear" icon-off="ion-ios7-gear-outline" ui-sref="tabs.reading">
-                <ion-nav-view name="reading">
+            <!--<ion-tab title="在读" icon-on="ion-ios7-gear" icon-off="ion-ios7-gear-outline" ui-sref="tabs.reading">-->
+                <!--<ion-nav-view name="reading">-->
 
-                </ion-nav-view>
-            </ion-tab>
+                <!--</ion-nav-view>-->
+            <!--</ion-tab>-->
             <ion-tab title="收藏" icon-on="ion-ios7-clock" icon-off="ion-ios7-clock-outline" ui-sref="tabs.fav">
                 <ion-nav-view name="fav">
 
@@ -39,16 +39,12 @@
     <ion-side-menu side="left">
         <div class="bar bar-header bar-light">
             <h1 class="title">个人中心</h1>
-
         </div>
         <ion-nav-view>
-             <ion-content>
-                 sd
+             <ion-content class="padTop">
+                 <button ng-click="clear()">清除个人数据</button>
+                 <button ng-click="star()">给我们评分</button>
              </ion-content>
         </ion-nav-view>
     </ion-side-menu>
-
-    <!--<!-- Right menu -->-->
-    <!--<ion-side-menu side="right">-->
-    <!--</ion-side-menu>-->
 </ion-side-menus>

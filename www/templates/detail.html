@@ -7,7 +7,8 @@
 </ion-header-bar>
 <ion-content class="padding">
     <ng-include src="'templates/basicInfo.html'"></ng-include>
-
+    <button class="button icon-left ion-star button-light" ng-if="!star" ng-click="fav()">收藏</button>
+    <button class="button icon-left ion-star button-light" ng-if="star" ng-click="unfav()">取消收藏</button>
     <div class="button-bar">
         <a class="button button-clear" ng-click="showBookInfo()">图书信息</a>
         <a class="button button-clear" ng-click="showReview()">书评</a>
@@ -31,10 +32,7 @@
     <div ng-show='review' class="animate-show">
 
         <ul class="list">
-            <ion-infinite-scroll
-                    on-infinite="loadReview()"
-                    distance="1%">
-            </ion-infinite-scroll>
+            <span>{{err}}</span>
             <li ng-repeat="ann in annotations">
                 <a class="item" ui-sref="annDetail({id:ann.id})">
                     <h6>发表时间：{{ann.time}}</h6>
@@ -42,12 +40,24 @@
                     <p>{{ann.summary}}</p>
                 </a>
             </li>
+            <ion-infinite-scroll
+                    on-infinite="loadReview()"
+                    distance="1%"
+                    ng-if="moreDataCanBeLoaded()">
+            </ion-infinite-scroll>
         </ul>
 
     </div>
     <div ng-show='libInfo' class="animate-show">
+        <ion-infinite-scroll
+                on-infinite="loadLib()"
+                distance="1%"
+                ng-if="moreDataCanBeLoaded()">
+        </ion-infinite-scroll>
+        <span>{{err}}</span>
         <ul class="items">
             <li ng-repeat="inlib in inlibs" class="item">
+
                 <ol>
                     <li>索书号:{{inlib['索书号']}}</li>
                     <li>年卷期:{{inlib['年卷期']}}</li>

@@ -4,7 +4,7 @@
 angular.module('bookStore.config', [])
     .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
-        $urlRouterProvider.otherwise('/tab/reading');
+        $urlRouterProvider.otherwise('/tab/search');
         $stateProvider
             .state('tabs',
             {
@@ -51,7 +51,7 @@ angular.module('bookStore.config', [])
                 views: {
                     'search': {
                         templateUrl: 'templates/search.html',
-                        controller: 'searchPageCtrl'
+                        controller: 'searchCtrl'
                     }
                 }
             })
@@ -73,6 +73,12 @@ angular.module('bookStore.config', [])
                 url: '/anndetail/:id',
                 templateUrl: 'templates/anndetail.html',
                 controller: 'anndetailCtrl'
+            })
+            .state('unLogin',
+            {
+                url: '/unLogin',
+                templateUrl: 'templates/unLogin.html',
+                controller: 'unlogCtrl'
             })
 })
 ;
