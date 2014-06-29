@@ -20,10 +20,9 @@ var fetch=function(isbn,callback){
                     "年卷期":b[3].replace(/\t/g, "").replace(/ /g, ""),
                     "校区—馆藏地":b[4].replace(/\t/g, "").replace(/ /g, ""),
                     "书刊状态":b[6].replace(/\t/g, "").replace(/ /g, "")
-                }
-
+                };
                 arr.push(c);
-            })
+            });
             callback(arr);
         })
 
