@@ -1,5 +1,4 @@
 var express = require('express');
-var douban = require('./douban_book');
 var app = express();
 
 app.get('/fetch', function (req, res) {
