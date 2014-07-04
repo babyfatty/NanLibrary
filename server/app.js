@@ -13,10 +13,11 @@ app.get('/fetch', function (req, res) {
 app.get("/fetch_rank", function (req, res) {
     var fetck_rank = require("./fetch_rank");
     var sum = 1;
+    var list =[];
     fetck_rank.book_list(undefined, function (book) {
-        res.write(JSON.stringify(book));
+        list.push(book);
         if (sum === 20) {
-            res.end();
+            res.send(list);
         }
         sum += 1;
     });
