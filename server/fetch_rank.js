@@ -47,7 +47,7 @@ function get_url(url, cls) {
     }
 }
 
-function formate_url(url) {
+function format_url(url) {
     return top_url.base + url.slice(2);
 }
 
@@ -83,17 +83,15 @@ exports.book_list = function (cls, callback) {
             $("#underlinemenu+table>tr").slice(1).each(function () {
                 var rank = $(this).children().first().text();
                 var view_nums = $(this).children().last().text();
-                var book_url = formate_url($(this).find("a").attr("href"));
-                var isbn;
+                var book_url = format_url($(this).find("a").attr("href"));
                 request.get(book_url)
                     .set("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36")
                     .end(function (res) {
                         $ = cheerio.load(res.text);
-                        isbn = resolve($("#item_detail>dl").find("dt:contains(ISBN)").first().next().text());
+                        var isbn = resolve($("#item_detail>dl").find("dt:contains(ISBN)").first().next().text());
                         var book = {
                             "rank": rank, "view_nums": view_nums, "book_url": book_url, "isbn": isbn
                         };
-                        console.log(isbn);
                         callback(book)
                     });
             });
