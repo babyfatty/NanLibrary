@@ -11,7 +11,7 @@
         <ion-tabs class="tabs-positive tabs-icon-top">
 
 
-            <ion-tab title="榜单" icon-on="ion-ios7-filing" icon-off="ion-ios7-filing-outline" ui-sref="tabs.list">
+            <ion-tab title="榜单" icon-on="ion-stats-bars" icon-off="ion-stats-bars" ui-sref="tabs.list">
                 <ion-nav-view name="list" >
 
                 </ion-nav-view>
@@ -21,12 +21,12 @@
 
                 <!--</ion-nav-view>-->
             <!--</ion-tab>-->
-            <ion-tab title="收藏" icon-on="ion-ios7-clock" icon-off="ion-ios7-clock-outline" ui-sref="tabs.fav">
+            <ion-tab title="收藏" icon-on="ion-heart" icon-off="ion-ios7-heart-outline" ui-sref="tabs.fav">
                 <ion-nav-view name="fav">
 
                 </ion-nav-view>
             </ion-tab>
-            <ion-tab title="查书" icon-on="ion-ios7-clock" icon-off="ion-ios7-clock-outline" ui-sref="tabs.search">
+            <ion-tab title="查书" icon-on="ion-ios7-search-strong" icon-off="ion-ios7-search" ui-sref="tabs.search">
                 <ion-nav-view name="search">
 
                 </ion-nav-view>
@@ -37,13 +37,16 @@
 
     <!-- Left menu -->
     <ion-side-menu side="left" width="170">
-        <div class="bar bar-header bar-light">
+        <div class="bar bar-header bar-positive">
             <h1 class="title">个人中心</h1>
         </div>
         <ion-nav-view>
              <ion-content class="padTop">
-                 <button ng-click="clear()">清除个人数据</button>
-                 <button ng-click="star()">给我们评分</button>
+                 <ul class="list">
+                     <li class="item" ng-click="clear()">
+                         清除个人数据
+                     </li>
+                 </ul>
              </ion-content>
         </ion-nav-view>
     </ion-side-menu>

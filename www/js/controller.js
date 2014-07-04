@@ -43,8 +43,19 @@ angular.module('bookStore.controllers', [])
             window.location.reload();
         }
     })
-    .controller('listCtrl', function ($scope) {
+    .controller('listCtrl', function ($scope,$http) {
         $scope.$parent.setTitle('榜单');
+        $scope.items = [];
+        $scope.loadMore = function() {
+            $http.get('/more-items').success(function(items) {
+
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+            });
+        };
+
+        $scope.$on('stateChangeSuccess', function() {
+            $scope.loadMore();
+        });
     })
     .controller('favCtrl', function ($scope) {
         $scope.$parent.setTitle('收藏');
@@ -143,7 +154,7 @@ angular.module('bookStore.controllers', [])
             $http.get(' https://api.douban.com/v2/book/'+id+'/annotations').success(function (res) {
                 $scope.annotations=$scope.annotations.concat(res.annotations);
                 if(length===0){
-                    $scope.err="暂无评论"
+                    $scope.err="暂无笔记"
                 }
                 console.log($scope.err);
             }).error(function(res){
@@ -154,14 +165,13 @@ angular.module('bookStore.controllers', [])
         var loadLib=function(){
              var isbn=$scope.book.isbn13;
             $http.get("http://www.shenxingchen.com:4000/fetch",{params:{'isbn': isbn}})
+
                 .success(function(res){
                    console.log(res);
                     $scope.inlibs=res;
                     if($scope.inlibs.length===0){
                         $scope.err="图书馆暂无此书"
                     }
-
-
                 })
                 .error(function(data,status,headers,config){
                     console.log(data);
