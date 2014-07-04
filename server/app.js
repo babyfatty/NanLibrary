@@ -15,12 +15,8 @@ app.get("/fetch_rank", function (req, res) {
     var fetck_rank = require("./fetch_rank");
     var sum = 1;
     fetck_rank.book_list(undefined, function (book) {
-        var rank = book.rank;
-        douban.get_book_isbn(book.isbn,function(book){
-            book.rank = rank;
-            res.write(JSON.stringify(book));
-        });
-        if (sum === 100) {
+        res.write(JSON.stringify(book));
+        if (sum === 20) {
             res.end();
         }
         sum += 1;
