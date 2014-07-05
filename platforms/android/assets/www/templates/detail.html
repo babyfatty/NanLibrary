@@ -11,7 +11,7 @@
     <button class="button icon-left ion-star button-light" ng-if="star" ng-click="unfav()">取消收藏</button>
     <div class="button-bar">
         <a class="button button-clear" ng-click="showBookInfo()">图书信息</a>
-        <a class="button button-clear" ng-click="showReview()">书评</a>
+        <a class="button button-clear" ng-click="showReview()">笔记</a>
         <a class="button button-clear" ng-click="showLibInfo()">馆藏信息</a>
     </div>
 
@@ -49,11 +49,7 @@
 
     </div>
     <div ng-show='libInfo' class="animate-show">
-        <ion-infinite-scroll
-                on-infinite="loadLib()"
-                distance="1%"
-                ng-if="moreDataCanBeLoaded()">
-        </ion-infinite-scroll>
+
         <span>{{err}}</span>
         <ul class="items">
             <li ng-repeat="inlib in inlibs" class="item">
@@ -66,6 +62,11 @@
                 </ol>
             </li>
         </ul>
+        <ion-infinite-scroll
+                on-infinite="loadMore()"
+                icon="ion-loading-c"
+                distance="1%">
+        </ion-infinite-scroll>
     </div>
 
 </ion-content>

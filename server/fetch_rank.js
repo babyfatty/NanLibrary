@@ -3,7 +3,7 @@
  */
 var request = require('superagent');
 var cheerio = require('cheerio');
-var redis = require("./redis");
+//var redis = require("./redis");
 
 var subjects = {
     "A": "马列主义、毛泽东思想、邓小平理论",

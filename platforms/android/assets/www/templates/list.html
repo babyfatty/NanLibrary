@@ -1,3 +1,20 @@
-<div class="padTop">
-    ccc
-</div>
+
+<ion-content >
+    <ul class="list">
+        <li ng-repeat="list in lists">
+            <a class="item" ui-sref="listDetail({isbn: list.isbn})">
+                <p>
+                    <span>书名 : {{list.name}}</span><br/>
+                    <span>作者 : {{list.author}}</span><br/>
+                    <span>出版社 : {{list.public}}</span><br/>
+                    <span>类型 : {{list.topic}}</span><br/>
+                    <span>浏览次数: {{list.view_nums}}</span>
+                </p>
+            </a>
+        </li>
+        <ion-infinite-scroll
+                icon="ion-loading-c"
+                on-infinite="loadMore()">
+        </ion-infinite-scroll>
+    </ul>
+</ion-content>

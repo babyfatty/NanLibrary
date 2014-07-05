@@ -47,12 +47,12 @@ angular.module('bookStore.controllers', [])
         $scope.$parent.setTitle('榜单');
         $scope.items = [];
         $scope.loadMore = function() {
-            $http.get('/more-items').success(function(items) {
-
+            $http.get('http://www.shenxingchen.com:5000/fetch_rank').success(function(items) {
+                console.log(items);
+                $scope.lists=items;
                 $scope.$broadcast('scroll.infiniteScrollComplete');
             });
         };
-
         $scope.$on('stateChangeSuccess', function() {
             $scope.loadMore();
         });
@@ -113,22 +113,29 @@ angular.module('bookStore.controllers', [])
     })
     .controller('detailCtrl', function ($scope, $stateParams, $window, $http) {
         var id = $stateParams.id;
+        var requsetUrl=function(){
+            if(id.length<=7){
+                return 'https://api.douban.com/v2/book/'+id
+            }
+            else{
+                return'https://api.douban.com/v2/book/isbn/'+id
+            }
+        }();
         $scope.annotations=[];
         $scope.cancel = function () {
             $window.history.back();
         };
-
         $scope.bookInfo=true;
         $scope.review=false;
         $scope.libInfo=false;
-
         var loadBook=function(){
-            $http.get('https://api.douban.com/v2/book/'+id)
+
+            $http.get(requsetUrl)
                 .success(function (res) {
                 $scope.book = res;
                 $scope.bookTitle=res.title;
                 $scope.catalog=res.catalog;
-
+                $scope.id=res.id;
                 $scope.star=localStorage.getItem(res.title);
                 console.log( $scope.star);
                 })
@@ -146,15 +153,12 @@ angular.module('bookStore.controllers', [])
                 };
             })
         };
-//        $scope.fav=function($scope){
-//            localStorage.setItem($scope.book.title,JSON.stringify($scope.book));
-//        };
         var loadReview=function(){
             var length = $scope.annotations.length;
-            $http.get(' https://api.douban.com/v2/book/'+id+'/annotations').success(function (res) {
+            $http.get(' https://api.douban.com/v2/book/'+$scope.id+'/annotations').success(function (res) {
                 $scope.annotations=$scope.annotations.concat(res.annotations);
-                if(length===0){
-                    $scope.err="暂无笔记"
+                if(res.annotations.length===0){
+                    $scope.err="暂无此书"
                 }
                 console.log($scope.err);
             }).error(function(res){
@@ -162,16 +166,35 @@ angular.module('bookStore.controllers', [])
             })
         };
 
-        var loadLib=function(){
-             var isbn=$scope.book.isbn13;
-            $http.get("http://www.shenxingchen.com:4000/fetch",{params:{'isbn': isbn}})
+//        var loadLib=function(){
+//             var isbn=$scope.book.isbn13;
+//            $http.get("http://www.shenxingchen.com:4000/fetch",{params:{'isbn': isbn}})
+//
+//                .success(function(res){
+//                   console.log(res);
+//                    $scope.inlibs=res;
+//                    if($scope.inlibs.length===0){
+//                        $scope.err="图书馆暂无此书"
+//                    }
+//                })
+//                .error(function(data,status,headers,config){
+//                    console.log(data);
+//                    console.log(status);
+//                    console.log(headers);
+//                    console.log(config);
+//                })
+//        };
+        $scope.loadMore=function(){
+            var isbn=$scope.book.isbn13;
+            $http.get("http://www.shenxingchen.com:5000/fetch",{params:{'isbn': isbn}})
 
                 .success(function(res){
-                   console.log(res);
+                    console.log(res);
                     $scope.inlibs=res;
                     if($scope.inlibs.length===0){
                         $scope.err="图书馆暂无此书"
                     }
+                    $scope.$broadcast('scroll.infiniteScrollComplete');
                 })
                 .error(function(data,status,headers,config){
                     console.log(data);
@@ -180,13 +203,17 @@ angular.module('bookStore.controllers', [])
                     console.log(config);
                 })
         };
+
         $scope.showBookInfo=function(){
             $scope.bookInfo=true;
             $scope.review=false;
             $scope.libInfo=false;
         };
+        $scope.$on('stateChangeSuccess', function() {
+            $scope.loadMore();
+        });
         $scope.showLibInfo=function(){
-            loadLib();
+            $scope.loadMore();
             $scope.bookInfo=false;
             $scope.review=false;
             $scope.libInfo=true;

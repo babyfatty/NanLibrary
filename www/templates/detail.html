@@ -49,11 +49,7 @@
 
     </div>
     <div ng-show='libInfo' class="animate-show">
-        <ion-infinite-scroll
-                on-infinite="loadLib()"
-                distance="1%"
-                ng-if="moreDataCanBeLoaded()">
-        </ion-infinite-scroll>
+
         <span>{{err}}</span>
         <ul class="items">
             <li ng-repeat="inlib in inlibs" class="item">
@@ -66,6 +62,11 @@
                 </ol>
             </li>
         </ul>
+        <ion-infinite-scroll
+                on-infinite="loadMore()"
+                icon="ion-loading-c"
+                distance="1%">
+        </ion-infinite-scroll>
     </div>
 
 </ion-content>
