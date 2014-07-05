@@ -3,7 +3,7 @@
  */
 var request = require('superagent');
 var cheerio = require('cheerio');
-//var redis = require("./redis");
+
 
 var subjects = {
     "A": "马列主义、毛泽东思想、邓小平理论",
@@ -92,12 +92,11 @@ exports.book_list = function (cls, callback) {
                         var isbn = resolve($("#item_detail>dl").find("dt:contains(ISBN)").first().next().text());
                         var author = $("#item_detail>dl").find("dt:contains(个人责任者)").first().next().text();
                         var topic = $("#item_detail>dl").find("dt:contains(学科主题)").first().next().text();
-                        var public = $("#item_detail>dl").find("dt:contains(出版发行项)").first().next().text();
+                        var publish = $("#item_detail>dl").find("dt:contains(出版发行项)").first().next().text();
                         var book = {
                             "rank": rank, "view_nums": view_nums, "book_url": book_url, "isbn": isbn,
-                            "author": author, "name": name, "topic": topic, "public": public
+                            "author": author, "name": name, "topic": topic, "publish": publish
                         };
-                        console.log(book);
                         callback(book);
                     });
             });

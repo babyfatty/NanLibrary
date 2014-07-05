@@ -18,6 +18,7 @@ app.get('/fetch', function (req, res) {
 
 app.get("/fetch_rank", function (req, res) {
 
+
     var fetck_rank = require("./fetch_rank");
     var sum = 1;
     client.get('bookss',function(err,reply){
@@ -34,6 +35,7 @@ app.get("/fetch_rank", function (req, res) {
         }else{
             res.send(reply);
             console.log(reply);
+
         }
     })
 
